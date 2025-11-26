@@ -1,0 +1,73 @@
+<?php
+// Inicijalne vrijednosti
+$a = $_GET['a'] ?? '';
+$b = $_GET['b'] ?? '';
+$c = null;
+
+// Ako su oba broja unesena — izračunaj
+if (is_numeric($a) && is_numeric($b)) {
+    $c = (3 * $a - $b) / 2;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vježba 4 – Izračun varijable c</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            padding: 6px;
+            width: 160px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 6px 14px;
+        }
+
+        .rezultat {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Izračun varijable c</h2>
+    <p>Formula: <strong>c = (3a – b) / 2</strong></p>
+
+    <form method="get" action="">
+        <label>Vrijednost a:</label>
+        <input type="text" name="a" value="<?php echo htmlspecialchars($a); ?>"><br>
+
+        <label>Vrijednost b:</label>
+        <input type="text" name="b" value="<?php echo htmlspecialchars($b); ?>"><br>
+
+        <button type="submit">Pošalji</button>
+    </form>
+
+    <?php if ($c !== null): ?>
+        <div class="rezultat">
+            IZLAZ: c = <?php echo $c; ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- Datoteka: vjezba4.php -->
+</body>
+</html>
