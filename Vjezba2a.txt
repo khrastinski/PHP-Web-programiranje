@@ -1,0 +1,136 @@
+<?php
+$naslov = "Moj prvi PHP dokument";
+$autor  = "Karlo Hrastinski"; 
+?>
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><?php echo $naslov; ?></title>
+
+    <style>
+        :root {
+            --bg: #0f172a;        /* tamna pozadina stranice */
+            --card: #ffffff;      /* bijeli sadržajni blok */
+            --text: #111827;      /* tamni tekst */
+            --muted: #6b7280;     /* sivi sekundarni tekst */
+            --accent: #2563eb;    /* primarna boja za naglaske i gumb */
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            font-size: 16px;
+        }
+
+        .wrap {
+            max-width: 720px;
+            margin: 48px auto;
+            background: var(--card);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: 2.1rem;
+        }
+
+        p {
+            margin: 0 0 16px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        /* obični link */
+        a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* gumb/link – primarna radnja */
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color .18s ease, color .18s ease,
+                        opacity .18s ease, transform .18s ease;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .btn:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .btn:active {
+            opacity: .9;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .btn {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1><?php echo $naslov; ?></h1>
+
+        <p>Ovu stranicu izradio/la je
+            <strong><?php echo $autor; ?></strong>.
+        </p>
+
+        <p>
+            Ovo je primjer običnog linka na
+            <a href="https://www.foi.unizg.hr" target="_blank" rel="noreferrer">FOI</a>
+            koji nije gumb.
+        </p>
+
+        <a class="btn" href="https://www.google.com" target="_blank" rel="noreferrer">
+            Posjeti Google
+        </a>
+
+        <p class="footer">
+            Naziv datoteke: vjezba1b.php
+        </p>
+    </div>
+
+</body>
+</html>
