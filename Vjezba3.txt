@@ -1,0 +1,177 @@
+<?php
+$naslov = "PHP dokument — vježba 1d";
+$autor  = "Karlo Hrastinski";
+$opis   = "Ova stranica nadograđuje vježbu 1c: biramo temu (dark/light), odabiremo sliku i po želji prikazujemo opis.";
+
+// opcije
+$teme = ["dark", "light"];
+$slike = ["php", "server", "code"];
+
+// GET parametri
+$tema = $_GET["tema"] ?? "dark";
+if (!in_array($tema, $teme)) $tema = "dark";
+
+$slika = $_GET["slika"] ?? "php";
+if (!in_array($slika, $slike)) $slika = "php";
+
+$prikaziOpis = isset($_GET["opis"]);
+
+$bodyClass = $tema === "light" ? "theme-light" : "theme-dark";
+
+$slikaSrc = "img/" . $slika . ".png";
+?>
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PHP dokument — vježba 1d</title>
+
+    <style>
+        :root {
+            --bg-dark: #0b1324;
+            --bg-light: #e5e7eb;
+            --card: #ffffff;
+            --text: #111827;
+            --muted: #6b7280;
+            --accent: #2563eb;
+        }
+
+        body.theme-dark {
+            background: var(--bg-dark);
+            color: var(--text);
+        }
+
+        body.theme-light {
+            background: var(--bg-light);
+            color: var(--text);
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .wrap {
+            max-width: 720px;
+            margin: 48px auto;
+            background: var(--card);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.1);
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin: 0 0 16px;
+            line-height: 1.6;
+        }
+
+        img.preview {
+            max-width: 260px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .form-section {
+            background: #f7f7f7;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .form-section label {
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            margin-right: 8px;
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            color: var(--accent);
+            text-decoration: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body class="<?php echo $bodyClass; ?>">
+
+<div class="wrap">
+
+    <h1><?php echo $naslov; ?></h1>
+
+    <p>Ovu stranicu izradio/la je <strong><?php echo $autor; ?></strong>.</p>
+
+    <img class="preview" src="<?php echo $slikaSrc; ?>" alt="Odabrana slika">
+
+    <?php if ($prikaziOpis): ?>
+        <p><?php echo $opis; ?></p>
+    <?php endif; ?>
+
+    <form method="get" action="vjezba1d.php">
+        
+        <div class="form-section">
+            <strong>Odaberi temu</strong><br><br>
+
+            <label>
+                <input type="radio" name="tema" value="dark" <?php if ($tema === "dark") echo "checked"; ?>>
+                Dark
+            </label><br>
+
+            <label>
+                <input type="radio" name="tema" value="light" <?php if ($tema === "light") echo "checked"; ?>>
+                Light
+            </label>
+        </div>
+
+        <div class="form-section">
+            <strong>Odaberi sliku</strong><br><br>
+
+            <label for="slika">Slika:</label><br>
+            <select name="slika" id="slika">
+                <option value="php" <?php if ($slika === "php") echo "selected"; ?>>PHP</option>
+                <option value="server" <?php if ($slika === "server") echo "selected"; ?>>Server</option>
+                <option value="code" <?php if ($slika === "code") echo "selected"; ?>>Code</option>
+            </select>
+        </div>
+
+        <label>
+            <input type="checkbox" name="opis" <?php if ($prikaziOpis) echo "checked"; ?>>
+            Prikaži opis
+        </label>
+        <br><br>
+
+        <button class="btn" type="submit">Primijeni odabir</button>
+        <a class="btn" href="vjezba1c.php">Natrag na vježba 1c</a>
+
+    </form>
+
+    <p class="footer">© <?php echo date("Y"); ?> — Demo za PHP</p>
+
+</div>
+
+<!-- Naziv datoteke: vjezba1d.php -->
+</body>
+</html>
