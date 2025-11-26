@@ -1,0 +1,21 @@
+<?php
+$naslov = "Moj prvi PHP dokument";
+$autor = "Karlo Hrastinski";  
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><?php echo $naslov; ?></title>
+</head>
+<body>
+
+<?php
+echo "<h1>$naslov</h1>";
+echo "<p>Ovu stranicu izradio/la je <strong>$autor</strong>.</p>";
+echo '<a href="https://www.google.com" target="_blank">Posjeti Google</a>';
+?>
+
+</body>
+</html>
