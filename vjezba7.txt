@@ -1,0 +1,93 @@
+<?php
+$poruka = "";
+$prosjek = "";
+$konacna = "";
+
+if (isset($_POST["izracunaj"])) {
+
+    // Spremanje ocjena u polje (array)
+    $ocjene = [
+        (int)$_POST["kol1"],
+        (int)$_POST["kol2"]
+    ];
+
+    // Provjera raspona ocjena
+    if ($ocjene[0] < 1 || $ocjene[0] > 5 || $ocjene[1] < 1 || $ocjene[1] > 5) {
+        $poruka = "Ocjene moraju biti u rasponu od 1 do 5.";
+    } 
+    // Ako je jedna negativna, konačna je negativna
+    elseif ($ocjene[0] == 1 || $ocjene[1] == 1) {
+        $prosjek = array_sum($ocjene) / count($ocjene);
+        $konacna = 1;
+    } 
+    // Inače računamo prosjek
+    else {
+        $prosjek = array_sum($ocjene) / count($ocjene);
+        $konacna = round($prosjek);
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vježba 7 – Polja podataka</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .box {
+            width: 320px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        input {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 12px;
+        }
+        .rezultat {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .greska {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Unos ocjena</h3>
+
+<div class="box">
+<form method="post">
+    <label>Ocjena I. kolokvija</label>
+    <input type="number" name="kol1" min="1" max="5" required>
+
+    <label>Ocjena II. kolokvija</label>
+    <input type="number" name="kol2" min="1" max="5" required>
+
+    <button type="submit" name="izracunaj">Izračunaj</button>
+</form>
+
+<?php if ($poruka != ""): ?>
+    <p class="greska"><?= $poruka ?></p>
+<?php endif; ?>
+
+<?php if ($prosjek !== ""): ?>
+    <div class="rezultat">
+        Prosjek: <?= $prosjek ?><br>
+        Konačna ocjena: <?= $konacna ?>
+    </div>
+<?php endif; ?>
+</div>
+
+<hr>
+<p>Autor: <strong>Karlo Hrastinski</strong></p>
+
+</body>
+</html>
