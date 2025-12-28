@@ -1,0 +1,79 @@
+<?php
+$rezultat = "";
+
+if (isset($_POST['operacija'])) {
+    $a = $_POST['broj1'];
+    $b = $_POST['broj2'];
+    $op = $_POST['operacija'];
+
+    switch ($op) {
+        case "+":
+            $rezultat = $a + $b;
+            break;
+
+        case "-":
+            $rezultat = $a - $b;
+            break;
+
+        case "*":
+            $rezultat = $a * $b;
+            break;
+
+        case "/":
+            if ($b != 0) {
+                $rezultat = $a / $b;
+            } else {
+                $rezultat = "Dijeljenje s nulom nije dozvoljeno";
+            }
+            break;
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulator (Switch naredba)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        input[type=number] {
+            width: 150px;
+            padding: 5px;
+        }
+        button {
+            padding: 6px 12px;
+            margin-right: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Kalkulator (Switch naredba)</h3>
+
+<form method="post">
+    <label>Upiši prvi broj *</label><br>
+    <input type="number" name="broj1" required>
+    <br><br>
+
+    <label>Upiši drugi broj *</label><br>
+    <input type="number" name="broj2" required>
+    <br><br>
+
+    <strong>Rezultat:</strong>
+    <p><?php echo $rezultat; ?></p>
+
+    <button type="submit" name="operacija" value="+">+</button>
+    <button type="submit" name="operacija" value="-">-</button>
+    <button type="submit" name="operacija" value="*">*</button>
+    <button type="submit" name="operacija" value="/">/</button>
+</form>
+
+<hr>
+<p>Autor: <strong>Karlo Hrastinski</strong></p>
+
+</body>
+</html>
