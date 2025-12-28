@@ -1,0 +1,64 @@
+<?php
+$cars = array("Audi", "BMW", "Renault", "Citroen");
+$odabrano = "";
+?>
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vježba 8 – Vozila</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .box {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 15px;
+            padding: 8px 14px;
+            background-color: #27b3a6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .rezultat {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Označi vozilo:</h3>
+
+<div class="box">
+<form method="post">
+
+    <?php
+    // foreach – ispis vozila kao radio buttona
+    foreach ($cars as $car) {
+        echo '<input type="radio" name="vozilo" value="'.$car.'" required> '.$car.'<br>';
+    }
+    ?>
+
+    <button type="submit" name="posalji">POŠALJI</button>
+</form>
+
+<?php
+// Ispis odabranog vozila
+if (isset($_POST["posalji"])) {
+    $odabrano = $_POST["vozilo"];
+    echo "<div class='rezultat'>Odabrano vozilo: $odabrano</div>";
+}
+?>
+</div>
+
+<hr>
+<p>Autor: <strong>Karlo Hrastinski</strong></p>
+
+</body>
+</html>
