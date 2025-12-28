@@ -1,0 +1,75 @@
+<?php
+if (isset($_POST['submit'])) {
+    setcookie("news_title", $_POST['title'], time() + 3600);
+    setcookie("news_text", $_POST['text'], time() + 3600);
+    header("Location: index.php");
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>News</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <?php include "menu.php"; ?>
+</header>
+
+<main>
+<h2>Unos vijesti</h2>
+
+<form method="post">
+    <label>Naslov</label>
+    <input type="text" name="title" required>
+
+    <label>Tekst</label>
+    <textarea name="text" required></textarea>
+
+    <input type="submit" name="submit" value="Spremi">
+</form>
+</main>
+
+<footer>
+    <p>Autor: Karlo Hrastinski</p>
+</footer>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <?php include "menu.php"; ?>
+</header>
+
+<main>
+<h2>Vijest iz kolačića</h2>
+
+<?php if (isset($_COOKIE['news_title']) && isset($_COOKIE['news_text'])): ?>
+    <h3><?= $_COOKIE['news_title']; ?></h3>
+    <p><?= $_COOKIE['news_text']; ?></p>
+<?php else: ?>
+    <p>Nema spremljene vijesti.</p>
+<?php endif; ?>
+
+</main>
+
+<footer>
+    <p>Autor: Karlo Hrastinski</p>
+</footer>
+
+</body>
+</html>

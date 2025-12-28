@@ -1,0 +1,83 @@
+<?php
+function jeProst($broj) {
+    if ($broj <= 1) {
+        return false;
+    }
+
+    for ($i = 2; $i <= sqrt($broj); $i++) {
+        if ($broj % $i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+$poruka = "";
+if (isset($_POST["provjeri"])) {
+    $n = (int)$_POST["broj"];
+
+    if (jeProst($n)) {
+        $poruka = "Broj $n je prost.";
+    } else {
+        $poruka = "Broj $n nije prost.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vježba 11 – Prosti brojevi</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .box {
+            width: 420px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .broj {
+            display: inline-block;
+            width: 35px;
+        }
+        .rezultat {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Provjera prostog broja</h3>
+
+<div class="box">
+<form method="post">
+    <label>Unesi broj:</label><br>
+    <input type="number" name="broj" required>
+    <br><br>
+    <button type="submit" name="provjeri">Provjeri</button>
+</form>
+
+<?php if ($poruka != ""): ?>
+    <div class="rezultat"><?= $poruka ?></div>
+<?php endif; ?>
+</div>
+
+<h3>Prosti brojevi manji od 100</h3>
+
+<div class="box">
+<?php
+for ($i = 2; $i < 100; $i++) {
+    if (jeProst($i)) {
+        echo "<span class='broj'>$i</span>";
+    }
+}
+?>
+</div>
+
+<hr>
+<p>Autor: <strong>Karlo Hrastinski</strong></p>
+
+</body>
+</html>

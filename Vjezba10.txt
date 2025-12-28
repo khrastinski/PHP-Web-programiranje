@@ -1,0 +1,55 @@
+<?php
+$tekst = "";
+$brojRijeci = "";
+
+if (isset($_POST["broji"])) {
+    $tekst = $_POST["tekst"];
+    $brojRijeci = str_word_count($tekst);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vježba 10 – Brojanje riječi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        input[type=text] {
+            width: 400px;
+            padding: 6px;
+        }
+        button {
+            padding: 6px 12px;
+        }
+        .rezultat {
+            margin-top: 15px;
+            color: darkred;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Zadatak str_word_count</h3>
+
+<form method="post">
+    <label>Ulazni niz:</label><br>
+    <input type="text" name="tekst" value="<?= $tekst ?>" required>
+    <br><br>
+    <button type="submit" name="broji">ispiši broj riječi</button>
+</form>
+
+<?php if ($brojRijeci !== ""): ?>
+    <div class="rezultat">
+        Ulazni niz: <?= $tekst ?> sadrži <?= $brojRijeci ?> riječi.
+    </div>
+<?php endif; ?>
+
+<hr>
+<p>Autor: <strong>Karlo Hrastinski</strong></p>
+
+</body>
+</html>
