@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pretraga korisnika</title>
+</head>
+<body>
+
+<h2>Pretraži korisnika</h2>
+
+<form method="GET">
+    <input type="text" name="search" placeholder="Unesite ime ili prezime" required>
+    <input type="submit" value="Traži">
+</form>
+
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "ime_baze";   // OVDJE upiši ime svoje baze
+
+$conn = new mysqli($servername, $username, $password, $database);
+
+if ($conn->connect_error) {
+    die("Greška u spajanju: " . $conn->connect_error);
+}
+
+if (isset($_GET['search'])) {
+
+    $search = $_GET['search'];
+
+    $sql = "SELECT * FROM users 
+            WHERE name LIKE '%$search%' 
+            OR lastname LIKE '%$search%'";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+
+        echo "<h3>Rezultati:</h3>";
+
+        while ($row = $result->fetch_assoc()) {
+            echo "ID: " . $row["id"] . "<br>";
+            echo "Ime: " . $row["name"] . "<br>";
+            echo "Prezime: " . $row["lastname"] . "<br>";
+            echo "Username: " . $row["username"] . "<br>";
+            echo "-----------------------<br>";
+        }
+
+    } else {
+        echo "Nema rezultata.";
+    }
+}
+
+$conn->close();
+
+?>
+
+</body>
+</html>
