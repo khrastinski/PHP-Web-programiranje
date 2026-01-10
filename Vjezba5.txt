@@ -1,0 +1,40 @@
+<?php
+$poruka = "";
+$zamisljen = rand(1, 9);
+
+if (isset($_POST["broj"])) {
+    $unos = $_POST["broj"];
+
+    if ($unos == $zamisljen) {
+        $poruka = "<span style='color:green;'>Pogodak, probaj ponovo!</span>";
+    } else {
+        $poruka = "<span style='color:red;'>Krivo, probaj ponovo!</span>";
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Vježba 5 - Pogodi broj</title>
+</head>
+<body>
+
+<h2>Igra (pogodi broj)</h2>
+
+<form method="POST">
+    Upiši jedan broj od 1 do 9:
+    <input type="number" name="broj" min="1" max="9" required>
+    <br><br>
+    <input type="submit" value="Provjeri">
+</form>
+
+<br>
+<?php echo $poruka; ?>
+
+<?php if (isset($_POST["broj"])): ?>
+    <p>Zamišljeni broj je <?php echo $zamisljen; ?></p>
+<?php endif; ?>
+
+</body>
+</html>
