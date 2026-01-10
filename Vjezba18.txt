@@ -1,0 +1,51 @@
+CREATE DATABASE IF NOT EXISTS vjezba18
+DEFAULT CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci;
+
+USE vjezba18;
+
+CREATE TABLE countries (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+name VARCHAR(100) NOT NULL,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE users (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+country_id INT UNSIGNED,
+PRIMARY KEY (id),
+FOREIGN KEY (country_id) REFERENCES countries(id)
+);
+
+INSERT INTO countries (name) VALUES
+('Argentina'),
+('Australia'),
+('Croatia'),
+('Germany');
+
+INSERT INTO users (first_name, last_name, country_id) VALUES
+('Ivan', 'Horvat', 1),
+('Ana', 'Kovač', 1),
+('Marko', 'Marić', 1),
+('Petra', 'Novak', 1),
+('Luka', 'Babić', 2);
+
+SELECT
+users.first_name,
+users.last_name,
+countries.name AS country
+FROM users
+JOIN countries ON users.country_id = countries.id;
+
+UPDATE users
+SET country_id = 2
+WHERE first_name = 'Ivan' AND last_name = 'Horvat';
+
+SELECT
+users.first_name,
+users.last_name,
+countries.name AS country
+FROM users
+JOIN countries ON users.country_id = countries.id;
