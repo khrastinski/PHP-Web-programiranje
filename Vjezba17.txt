@@ -1,0 +1,51 @@
+USE vjezba17;
+
+CREATE TABLE IF NOT EXISTS countries (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_country_name (name)
+);
+
+INSERT IGNORE INTO countries (name) VALUES
+('Argentina'),
+('Australia'),
+('Croatia'),
+('Germany'),
+('Bosnia and Herzegovina'),
+('Slovenia');
+
+ALTER TABLE users
+ADD COLUMN country_id INT UNSIGNED NULL;
+
+ALTER TABLE users
+ADD CONSTRAINT fk_users_country
+FOREIGN KEY (country_id) REFERENCES countries(id);
+
+UPDATE users u
+JOIN countries c ON c.name = 'Argentina'
+SET u.country_id = c.id
+WHERE u.username IN ('ivan01', 'ana22');
+
+UPDATE users u
+JOIN countries c ON c.name = 'Australia'
+SET u.country_id = c.id
+WHERE u.username = 'marko9';
+
+UPDATE users u
+JOIN countries c ON c.name = 'Croatia'
+SET u.country_id = c.id
+WHERE u.username = 'petra7';
+
+UPDATE users u
+JOIN countries c ON c.name = 'Germany'
+SET u.country_id = c.id
+WHERE u.username = 'luka10';
+
+SELECT 
+    u.first_name,
+    u.last_name,
+    c.name AS country
+FROM users u
+JOIN countries c ON u.country_id = c.id
+ORDER BY u.last_name, u.first_name;
